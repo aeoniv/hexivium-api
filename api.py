@@ -2,10 +2,7 @@ from flask import Flask, request, jsonify
 import requests
 import os
 
-port = int(os.environ.get("PORT", 5000))
-app.run(host='0.0.0.0', port=port)
-
-app = Flask(__name__)
+app = Flask(__name__)  # Define the Flask app here
 
 # Replace 'your_api_key_here' with the actual API key
 API_KEY = os.environ.get('BODYGRAPH', 'your_api_key_here')
@@ -39,4 +36,6 @@ def fetch_data():
     return jsonify(response.json())
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Only run the app if this script is executed directly
+    port = int(os.environ.get("PORT", 5000))  # Use the PORT environment variable
+    app.run(host='0.0.0.0', port=port, debug=True)  # Start the Flask app
