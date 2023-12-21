@@ -27,11 +27,21 @@ def fetch_bodygraph_data():
     # Make a request to the original API
     response = requests.get(url, params=payload)
 
-    # Return the response as JSON
-    if response.status_code == 200:
-        return jsonify(response.json())
-    else:
-        return jsonify({"error": "Failed to fetch data", "status_code": response.status_code})
+    try:
+        response = requests.get(url, params=payload)
+        response.raise_for_status()  # This will raise an exception for HTTP errors
+    except requests.exceptions.HTTPError as errh:
+        print ("Http Error:", errh)
+        return jsonify({"error": str(errh), "status_code": 500})
+    except requests.exceptions.ConnectionError as errc:
+        print ("Error Connecting:", errc)
+        return jsonify({"error": str(errc), "status_code": 500})
+    except requests.exceptions.Timeout as errt:
+        print ("Timeout Error:", errt)
+        return jsonify({"error": str(errt), "status_code": 500})
+    except requests.exceptions.RequestException as err:
+        print ("OOps: Something Else", err)
+        return jsonify({"error": str(err), "status_code": 500})
 
 if __name__ == '__main__':
     # Only run the app if this script is executed directly
