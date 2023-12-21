@@ -6,7 +6,7 @@ app = Flask(__name__)  # Define the Flask app here
 
 # Replace 'your_api_key_here' with the actual API key
 #API_KEY = os.environ.get('BODYGRAPH') #, 'your_api_key_here'
-API_KEY = os.getenv("BODYGRAPH")
+API_KEY = os.getenv("BODYGRAPH"), '86a17444-bc30-4cf5-a6f7-0d5f862a4ea9'
 
 @app.route('/')
 def home():
