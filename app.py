@@ -7,6 +7,10 @@ app = Flask(__name__)  # Define the Flask app here
 # Replace 'your_api_key_here' with the actual API key
 API_KEY = os.environ.get('BODYGRAPH', 'your_api_key_here')
 
+@app.route('/')
+def home():
+    return "Welcome to my Flask app!"
+
 # The route that your users will call
 @app.route('/fetch-data', methods=['GET'])
 def fetch_data():
