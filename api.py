@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify
 import requests
 import os
 
+port = int(os.environ.get("PORT", 5000))
+app.run(host='0.0.0.0', port=port)
+
 app = Flask(__name__)
 
 # Replace 'your_api_key_here' with the actual API key
